@@ -16,6 +16,21 @@ class LinkedList2D:
     def AddStudentToCourse(self, grade, course, student):
         newNode = self.Node2D(grade, student, course,
                               self.studentHead, self.courseHead)
+        self.courseHead = newNode
+        self.studentHead = newNode
 
+    def printAll(self):
+        print('starting from students')
+        currentStudent = self.studentHead
+        while currentStudent != None:
+            print('stdent name', currentStudent.student.Name,
+                  ' --- current course:', currentStudent.course.Name, ' --- Grade:', currentStudent.value)
+            currentStudent = currentStudent.NextStudent
+        print('-------------------------')
+        print('starting from course list')
         currentCourse = self.courseHead
-        while currentCourse
+        while currentCourse != None:
+            print('course name', currentCourse.course.Name,
+                  ' --- current student:', currentCourse.student.Name, ' --- Grade:', currentCourse.value)
+            currentCourse = currentCourse.NextCourse
+        print('end of printing')
