@@ -39,6 +39,8 @@ class LinkedList:
 
     def print(self):
         current = self.head
+        print('---- list size :', self.size, ' ----')
         while current != None:
             print(current.value.Name)
             current = current.next
+        print('---- end of list ----')
