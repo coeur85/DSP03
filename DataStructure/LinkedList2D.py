@@ -1,7 +1,7 @@
 class LinkedList2D:
     class Node2D:
-        def __init__(self, value, student, course, nextStudent=None, nextCourse=None):
-            self.Grade = value
+        def __init__(self, grade, student, course, nextStudent=None, nextCourse=None):
+            self.Grade = grade
             self.Student = student
             self.Course = course
             self.NextStudentNode = nextStudent
@@ -14,7 +14,19 @@ class LinkedList2D:
         self.courseHead = None
 
     def AddStudentToCourse(self, grade, course, student):
-        
+        newNode = self.Node2D(grade,student,course)
+        currentCourseNode = self.courseHead
+        if currentCourseNode == None:
+            self.courseHead = newNode
+        else:
+            while currentCourseNode != None:
+                if currentCourseNode.Course != course:
+                    currentCourseNode = currentCourseNode.NextCourseNode
+                else:
+                    
+
+
+
         
 
     def printAll(self):
