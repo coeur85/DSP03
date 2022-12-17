@@ -11,8 +11,9 @@ class Context():
         StudentSize = 10
         CourseSize = 10
         self._studentContext = self.Students()
-        self.Courses()
-        self.StudentCourse(StudentSize * CourseSize)
+        self._courseContext = self.Courses()
+        self._studentCourseContext = self.StudentCourse(
+            StudentSize * CourseSize)
 
     class Students():
         def __init__(self):
@@ -38,7 +39,7 @@ class Context():
             newCourse = Course(self._currentMaxCourseId, name)
             self._courseList.Add(newCourse)
             self._currentMaxCourseId += 1
-            self.storage.SaveToFile(self.studentsFileName, self)
+            self.storage.SaveToFile(self.courseFileName, self)
 
     class StudentCourse():
         def __init__(self, tableSize):
@@ -54,4 +55,4 @@ class Context():
             key = self.__computeKey(studentId, courseId)
             newStudentCourse = StudentCourse(studentId, courseId, grade)
             self._gradesTable.Add(key, newStudentCourse)
-            self.storage.SaveToFile(self.studentCourseFielName , self)
+            self.storage.SaveToFile(self.studentCourseFielName, self)
