@@ -21,6 +21,9 @@ class Context():
             self._currentMaxStudentId = 1
             self.studentsFileName = 'students'
             self.storage = StorageBroker()
+            newObject = self.storage.LoadFromFile(self.studentsFileName)
+            if newObject != None:
+                self = newObject
 
         def AddNewStudent(self, name):
             newStudent = Student(self._currentMaxStudentId, name)
@@ -34,6 +37,9 @@ class Context():
             self._currentMaxCourseId = 1
             self.courseFileName = 'courses'
             self.storage = StorageBroker()
+            newObject = self.storage.LoadFromFile(self.courseFileName)
+            if newObject != None:
+                self = newObject
 
         def AddNewCourse(self, name):
             newCourse = Course(self._currentMaxCourseId, name)
@@ -46,7 +52,10 @@ class Context():
             self._gradesTable = HashTbale(tableSize)
             self.studentCourseFielName = 'studentCourse'
             self.storage = StorageBroker()
-
+            newObject = self.storage.LoadFromFile(self.studentCourseFielName)
+            if newObject != None:
+                self = newObject
+                
         def __computeKey(self, studentId: int, courseId: int) -> int:
             newKey = f'{studentId}{courseId}'
             return int(newKey)
