@@ -12,14 +12,17 @@ class TestLinkedList(unittest.TestCase):
         self.studentsList.Add(self.student1)
         self.studentsList.Add(self.student2)
 
-    def GetRandomStudent(self) -> Student:
+    def GetNewRandomStudent(self) -> Student:
         return Student(3, 'TestStudent')
+
+    def GetExistingStudent(self) -> Student:
+        return Student(1, 'ahmed')
 
 
 class TestAdd(TestLinkedList):
-    def test_AddStudent(self):
+    def test_ShouldAddStudent(self):
         # gevin
-        studentToAdd = self.GetRandomStudent()
+        studentToAdd = self.GetNewRandomStudent()
         # when
         self.studentsList.Add(studentToAdd)
         retrevedStudent = self.studentsList.Select(studentToAdd.Id)
@@ -27,9 +30,9 @@ class TestAdd(TestLinkedList):
         self.assertEqual(self.studentsList.lenth(), 3)
         self.assertEqual(retrevedStudent, studentToAdd)
 
-    def test_AddStudentAlreadyExists(self):
+    def test_ShouldThrowsExceptionIfStudentAlreadyExists(self):
         # gevin
-        studentToAdd = Student(1, 'adam')
+        studentToAdd = self.GetExistingStudent()
         # when
         # then
         with self.assertRaises(Exception) as context:
@@ -37,9 +40,9 @@ class TestAdd(TestLinkedList):
 
 
 class TestRemove(TestLinkedList):
-    def test_RemoveStudent(self):
+    def test_ShouldRemoveStudent(self):
         # gevin
-        studentToAdd = self.GetRandomStudent()
+        studentToAdd = self.GetNewRandomStudent()
         stuentToRemove = studentToAdd
         self.studentsList.Add(studentToAdd)
         # when
@@ -47,9 +50,9 @@ class TestRemove(TestLinkedList):
         # then
         self.assertEqual(self.studentsList.lenth(), 2)
 
-    def test_RemoveDoesNotExisitsStudnet(self):
+    def test_ShouldThrowExptionIfStudentDoesNotExisits(self):
         # gevin
-        studentToRemnove = self.GetRandomStudent()
+        studentToRemnove = self.GetNewRandomStudent()
         # when
         # then
         with self.assertRaises(Exception) as context:
@@ -62,3 +65,13 @@ class TestRemove(TestLinkedList):
         # then
         with self.assertRaises(Exception) as context:
             emptyList.Remove(1)
+
+
+class TestSelect(TestLinkedList):
+    def test_ShouldSelectStudent(self):
+        # gevin
+        expectedStudent = self.GetExistingStudent()
+        # when
+        retrviedStudent = self.studentsList.Select(expectedStudent.Id)
+        # then
+        self.assertEquals(expectedStudent, retrviedStudent)
