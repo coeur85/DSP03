@@ -1,4 +1,5 @@
-import json
+import pickle
+
 from DataStructure.HashTable import HashTbale
 from DataStructure.LinkedList import LinkedList
 from Models.Course import Course
@@ -15,10 +16,12 @@ class Context:
         self.StudentCourse(StudentSize * CourseSize)
 
     def SaveToFile(self):
-        jsonString = json.dumps(self._studentContext)
-        jsonFile = open('students.json', 'w')
-        jsonFile.write(jsonString)
-        jsonFile.close()
+        with open('Data/studentContext.dbfile', 'wb') as studentContextFile:
+            pickle.dump(self._studentContext, studentContextFile)
+
+    def LoadFromFile(self):
+        with open('Data/studentContext.dbfile', 'rb') as studentContextFile:
+            self._studentContext = pickle.load(studentContextFile)
 
     class Students():
         def __init__(self):
