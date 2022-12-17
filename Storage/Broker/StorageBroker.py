@@ -2,7 +2,8 @@ import pickle
 
 
 class StorageBroker:
-    path = './Storage/Data'
+    def __init__(self) -> None:
+        self.path = './Storage/Data'
 
     def SaveToFile(self, fileName: str, objectToSave):
         with open(f'{self.path}/{fileName}.dbfile', 'wb') as contextFile:

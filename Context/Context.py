@@ -1,10 +1,9 @@
-
-
 from DataStructure.HashTable import HashTbale
 from DataStructure.LinkedList import LinkedList
 from Models.Course import Course
 from Models.Student import Student
 from Models.StudentCourse import StudentCourse
+from Storage.Broker.StorageBroker import StorageBroker
 
 
 class Context():
@@ -20,12 +19,13 @@ class Context():
             self._studentList = LinkedList()
             self._currentMaxStudentId = 1
             self.studentsFileName = 'students'
+            self.storage = StorageBroker()
 
         def AddNewStudent(self, name):
             newStudent = Student(self._currentMaxStudentId, name)
             self._studentList.Add(newStudent)
             self._currentMaxStudentId += 1
-            Context.__SaveToFile(self, self.studentsFileName, self)
+            self.storage.SaveToFile(self.studentsFileName, self)
 
     class Courses():
         def __init__(self):
