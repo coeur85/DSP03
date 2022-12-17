@@ -89,3 +89,11 @@ class TestSelect(TestHashTable):
         retrivedStudent = self.dataTable.Select(exisitingStudent.Id)
         # then
         self.assertEqual(exisitingStudent, retrivedStudent)
+
+    def test_ShouldRetrunNoneIfStudentDoesNotExisits(self):
+            # gevin
+        newStudent = self.GetNewRandomStudent()
+        # when
+        retrivedStudent = self.dataTable.Select(newStudent.Id)
+        # then
+        self.assertNone(retrivedStudent)
