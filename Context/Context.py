@@ -1,3 +1,4 @@
+import json
 from DataStructure.HashTable import HashTbale
 from DataStructure.LinkedList import LinkedList
 from Models.Course import Course
@@ -9,9 +10,15 @@ class Context:
     def __init__(self):
         StudentSize = 10
         CourseSize = 10
-        self.Students()
+        self._studentContext = self.Students()
         self.Courses()
         self.StudentCourse(StudentSize * CourseSize)
+
+    def SaveToFile(self):
+        jsonString = json.dumps(self._studentContext)
+        jsonFile = open('students.json', 'w')
+        jsonFile.write(jsonString)
+        jsonFile.close()
 
     class Students():
         def __init__(self):
