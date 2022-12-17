@@ -1,3 +1,4 @@
 class Student:
-    def __init__(self, name):
+    def __init__(self, id, name):
+        self.Id = id
         self.Name = name
