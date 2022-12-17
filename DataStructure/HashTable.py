@@ -8,10 +8,10 @@ class HashTbale:
         self.status_arr = [0] * (arrSize)
         self.size = arrSize
 
-    def __computeHashkey(self,key):        # privet method
+    def __computeHashkey(self, key):        # privet method
         return key
 
-    def __validatekey(self,key):
+    def __validatekey(self, key):
         if key < 1:
             raise RuntimeError(
                 'index must be greater than or equal to 1, key :', key)
@@ -21,9 +21,6 @@ class HashTbale:
     def Add(self, key, value):
         self.__validatekey(key)
         index = key - 1
-        if index > self.size:
-            raise RuntimeError(
-                'index id is out of range, max id value is ', self.size)
         hash_key = self.__computeHashkey(index)
         if self.status_arr[hash_key] == self.cell_is_full:
             raise RuntimeError('this key is already taken, key code :', key)

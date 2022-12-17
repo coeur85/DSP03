@@ -5,7 +5,8 @@ from Models.Student import Student
 
 class TestHashTable(unittest.TestCase):
     def setUp(self):
-        self.dataTable = HashTbale(10)
+        self.arr_size = 10
+        self.dataTable = HashTbale(self.arr_size)
         # add basic data
         student1 = Student(1, 'ahmed')
         student2 = Student(2, 'eman')
@@ -34,3 +35,19 @@ class TestAdd(TestHashTable):
         retrivedStudent = self.dataTable.Select(studentToAdd.Id)
         # then
         self.assertEqual(retrivedStudent, studentToAdd)
+
+    def test_ShouldThrowExceptionIfKeyLessthan1(self):
+        # gevin
+        invaledStudent = Student(-1,'ahmed')
+        # when
+        # then
+        with self.assertRaises(Exception) as _ :
+            self.dataTable.Add(invaledStudent.Id,invaledStudent)
+
+    def test_ShouldThrowExceptionIfKeyBiggerThantableSize(self):
+        # gevin
+        invaledStudent = Student(self.arr_size + 1,'ahmed')
+        # when
+        # then
+        with self.assertRaises(Exception) as _ :
+            self.dataTable.Add(invaledStudent.Id,invaledStudent)
