@@ -35,6 +35,7 @@ class TestAdd(TestHashTable):
         retrivedStudent = self.dataTable.Select(studentToAdd.Id)
         # then
         self.assertEqual(retrivedStudent, studentToAdd)
+
     def test_ShouldThrowExceptionIfKeyLessthan1(self):
         # gevin
         invaledStudent = Student(-1, 'ahmed')
@@ -42,6 +43,7 @@ class TestAdd(TestHashTable):
         # then
         with self.assertRaises(Exception) as _:
             self.dataTable.Add(invaledStudent.Id, invaledStudent)
+
     def test_ShouldThrowExceptionIfKeyBiggerThantableSize(self):
         # gevin
         invaledStudent = Student(self.arr_size + 1, 'ahmed')
@@ -49,6 +51,7 @@ class TestAdd(TestHashTable):
         # then
         with self.assertRaises(Exception) as _:
             self.dataTable.Add(invaledStudent.Id, invaledStudent)
+
     def test_ShouldThrowExceptionIfStudentAlreadyExisits(self):
         # gevin
         invaledStudent = self.GetExistingStudent()
@@ -56,3 +59,33 @@ class TestAdd(TestHashTable):
         # then
         with self.assertRaises(Exception) as _:
             self.dataTable.Add(invaledStudent.Id, invaledStudent)
+
+
+class TestRemove(TestHashTable):
+    def test_ShouldRemoveStudent(self):
+        # gevin
+        exisitingStudent = self.GetExistingStudent()
+        # when
+        self.dataTable.Remove(exisitingStudent.Id)
+        dbStudent = self.dataTable.Select(exisitingStudent.Id)
+        # then
+        self.assertIsNone(dbStudent)
+
+    def test_ShouldThrowErrorIfStudentAlreadyRemoved(self):
+        # gevin
+        exisitingStudent = self.GetExistingStudent()
+        self.dataTable.Remove(exisitingStudent.Id)
+        # when
+        # then
+        with self.assertRaises(Exception) as _:
+            self.dataTable.Remove(exisitingStudent.Id)
+
+
+class TestSelect(TestHashTable):
+    def test_ShouldSelect(self):
+        # gevin
+        exisitingStudent = self.GetExistingStudent()
+        # when
+        retrivedStudent = self.dataTable.Select(exisitingStudent.Id)
+        # then
+        self.assertEqual(exisitingStudent, retrivedStudent)
