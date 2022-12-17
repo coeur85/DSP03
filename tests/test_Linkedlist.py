@@ -54,3 +54,11 @@ class TestRemove(TestLinkedList):
         # then
         with self.assertRaises(Exception) as context:
             self.studentsList.Remove(studentToRemnove.Id)
+
+    def test_ShouldThrowExceptionIfListIsEmpty(self):
+        # gevin
+        emptyList = LinkedList()
+        # when
+        # then
+        with self.assertRaises(Exception) as context:
+            emptyList.Remove(1)
