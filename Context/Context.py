@@ -31,6 +31,10 @@ class Context():
             self._currentMaxStudentId += 1
             self.storage.SaveToFile(self.studentsFileName, self)
 
+        def DeleteStudent(self, Id: int):
+            self._studentList.Remove(Id)
+            self.storage.SaveToFile(self.studentsFileName, self)
+
     class Courses():
         def __init__(self):
             self._courseList = LinkedList()
@@ -46,6 +50,9 @@ class Context():
             self._courseList.Add(newCourse)
             self._currentMaxCourseId += 1
             self.storage.SaveToFile(self.courseFileName, self)
+        def DeleteCourse(self,Id):
+            self._courseList.Remove(Id)
+            self.storage.SaveToFile(self.courseFileName, self)
 
     class StudentCourse():
         def __init__(self, tableSize):
@@ -55,7 +62,7 @@ class Context():
             newObject = self.storage.LoadFromFile(self.studentCourseFielName)
             if newObject != None:
                 self = newObject
-                
+
         def __computeKey(self, studentId: int, courseId: int) -> int:
             newKey = f'{studentId}{courseId}'
             return int(newKey)
@@ -64,4 +71,9 @@ class Context():
             key = self.__computeKey(studentId, courseId)
             newStudentCourse = StudentCourse(studentId, courseId, grade)
             self._gradesTable.Add(key, newStudentCourse)
+            self.storage.SaveToFile(self.studentCourseFielName, self)
+
+        def RemoveCourseFromStudent(self, studentId, courseId):
+            key = self.__computeKey(studentId, courseId)
+            self._gradesTable.Remove(key)
             self.storage.SaveToFile(self.studentCourseFielName, self)
