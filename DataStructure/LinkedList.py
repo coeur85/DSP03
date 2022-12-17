@@ -54,11 +54,13 @@ class LinkedList:
         current = self.head
         if current == None:
             return None
+        if self.head.value.Id == key:
+            return self.head.value
         while current.next != None:
-            if current.value.Id != key:
+            if current.next.value.Id != key:
                 current = current.next
             else:
-                return current.value
+                return current.next.value
         return None
 
     def Update(self, key, value):

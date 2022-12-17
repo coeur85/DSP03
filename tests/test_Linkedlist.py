@@ -8,7 +8,7 @@ class TestLinkedList(unittest.TestCase):
         self.studentsList = LinkedList()
         # add basic data
         self.student1 = Student(1, 'ahmed')
-        self.student2 = Student(1, 'eman')
+        self.student2 = Student(2, 'eman')
         self.studentsList.Add(self.student1)
         self.studentsList.Add(self.student2)
 
@@ -74,4 +74,6 @@ class TestSelect(TestLinkedList):
         # when
         retrviedStudent = self.studentsList.Select(expectedStudent.Id)
         # then
-        self.assertEquals(expectedStudent, retrviedStudent)
+        self.assertEqual(expectedStudent, retrviedStudent)
+
+     
