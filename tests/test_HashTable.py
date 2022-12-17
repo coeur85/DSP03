@@ -91,9 +91,31 @@ class TestSelect(TestHashTable):
         self.assertEqual(exisitingStudent, retrivedStudent)
 
     def test_ShouldRetrunNoneIfStudentDoesNotExisits(self):
-            # gevin
+        # gevin
         newStudent = self.GetNewRandomStudent()
         # when
         retrivedStudent = self.dataTable.Select(newStudent.Id)
         # then
-        self.assertNone(retrivedStudent)
+        self.assertIsNone(retrivedStudent)
+
+
+class TestUpdate(TestHashTable):
+    def test_ShouldUpdate(self):
+        # gvin
+        exisitingStudent = self.GetExistingStudent()
+        newName = 'Omar'
+        expectedUpdatedStudent = exisitingStudent
+        expectedUpdatedStudent.Name = newName
+        exisitingStudent.Name = newName
+        # when
+        self.dataTable.Update(exisitingStudent.Id, exisitingStudent)
+        updatedStudent = self.dataTable.Select(exisitingStudent.Id)
+        # then
+        self.assertEqual(expectedUpdatedStudent, updatedStudent)
+    def test_ShouldThrowErrorIfKeyDoesNotExisits(self):
+        # gvin
+        newStudent = self.GetNewRandomStudent()
+        # when
+        # then
+        with self.assertRaises(Exception) as _:
+            self.dataTable.Update(newStudent.Id,newStudent)
