@@ -15,6 +15,8 @@ class TestLinkedList(unittest.TestCase):
     def GetRandomStudent(self) -> Student:
         return Student(3, 'TestStudent')
 
+
+class TestAdd(TestLinkedList):
     def test_AddStudent(self):
         # gevin
         studentToAdd = self.GetRandomStudent()
@@ -24,13 +26,17 @@ class TestLinkedList(unittest.TestCase):
         # then
         self.assertEqual(self.studentsList.lenth(), 3)
         self.assertEqual(retrevedStudent, studentToAdd)
+
     def test_AddStudentAlreadyExists(self):
         # gevin
-        studentToAdd = Student(1,'adam')
+        studentToAdd = Student(1, 'adam')
         # when
         # then
-        self.assertRaises(Exception,self.studentsList.Add(studentToAdd))
+        with self.assertRaises(Exception) as context:
+            self.studentsList.Add(studentToAdd)
 
+
+class TestRemove(TestLinkedList):
     def test_RemoveStudent(self):
         # gevin
         studentToAdd = self.GetRandomStudent()
@@ -46,5 +52,5 @@ class TestLinkedList(unittest.TestCase):
         studentToRemnove = self.GetRandomStudent()
         # when
         # then
-        self.assertRaises(
-            Exception, self.studentsList.Remove(studentToRemnove.Id))
+        with self.assertRaises(Exception) as context:
+            self.studentsList.Remove(studentToRemnove.Id)
