@@ -8,38 +8,53 @@ class HashTbale:
         self.status_arr = [0] * (arrSize)
         self.size = arrSize
 
-    def hashkey(self, key):
+    def __computeHashkey(key):        # privet method
         return key
 
+    def __validatekey(key):
+        if key.isdigit() == False:
+            raise RuntimeError('the key is not a number, key :', key)
+        if key < 1:
+            raise RuntimeError(
+                'index must be greater than or equal to 1, key :', key)
+
     def Add(self, key, value):
+        self.__validatekey(key)
         index = key - 1
         if index > self.size:
             raise RuntimeError(
                 'index id is out of range, max id value is ', self.size)
-        hash_key = self.hashkey(index)
+        hash_key = self.__computeHashkey(index)
         if self.status_arr[hash_key] == self.cell_is_full:
-            print(self.status_arr[hash_key])
             raise RuntimeError('this key is already taken, key code :', key)
         self.key_arr[hash_key] = key
         self.data_arr[hash_key] = value
         self.status_arr[hash_key] = self.cell_is_full
-        print('Added !')
 
     def Remove(self, key):
+        self.__validatekey(key)
         index = key - 1
-        hash_key = self.hashkey(index)
+        hash_key = self.__computeHashkey(index)
         if self.status_arr[hash_key] == self.cell_is_empty:
             raise RuntimeError('this key does not existis, key code', key)
         self.key_arr[hash_key] = None
         self.key_arr[hash_key] = None
         self.status_arr[hash_key] = self.cell_is_empty
-        print('Deleted !')
 
-    def Print(self, printEmpty=False):
-        for i in range(self.size):
-            hash_key = self.hashkey(i)
-            if self.status_arr[hash_key] == self.cell_is_empty and printEmpty == True:
-                print('data in line', i + 1, 'is empty')
-            elif self.status_arr[hash_key] == self.cell_is_full:
-                print('line id', i + 1, 'line value', self.data_arr[hash_key])
-        print('end of printing')
+    def Select(self, key):
+        self.__validatekey(key)
+        index = key - 1
+        hash_key = self.__computeHashkey(index)
+        if self.status_arr[hash_key] == self.cell_is_empty:
+            return None
+        else:
+            return self.data_arr[hash_key]
+
+    def Update(self, key, value):
+        self.__validatekey(key)
+        index = key - 1
+        hash_key = self.__computeHashkey(index)
+        if self.status_arr[hash_key] == self.cell_is_empty:
+            raise RuntimeError('this key does not existis, key code', key)
+        else:
+            self.data_arr[hash_key] = value
