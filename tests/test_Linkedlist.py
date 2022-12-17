@@ -83,3 +83,35 @@ class TestSelect(TestLinkedList):
         retrivedStudent = self.studentsList.Select(newStudent.Id)
         # then
         self.assertIsNone(retrivedStudent)
+
+    def test_ShouldReturnNoneIfListIsEmpty(self):
+        # gevin
+        newList = LinkedList()
+        # when
+        retrivedStudent = newList.Select(1)
+        # then
+        self.assertIsNone(retrivedStudent)
+
+
+class TestUpdate(TestLinkedList):
+    def test_ShouldUpdate(self):
+        # gevin
+        orginalStudent = self.GetExistingStudent()
+        newName = 'Omar'
+        expectedUpdatedStudent = orginalStudent
+        expectedUpdatedStudent.Name = newName
+        # when
+        dbStudent = self.studentsList.Select(orginalStudent.Id)
+        dbStudent.Name = newName
+        self.studentsList.Update(dbStudent.Id, dbStudent)
+        updatedStudent = self.studentsList.Select(orginalStudent.Id)
+        # then
+        self.assertEqual(expectedUpdatedStudent, updatedStudent)
+
+    def test_ShouldReturnNoneIfStudentDoesNotExisit(self):
+        # gevin
+        newStudent = self.GetNewRandomStudent()
+        # when
+        # then
+        with self.assertRaises(Exception) as _:
+            self.studentsList.Update(newStudent.Id, newStudent)

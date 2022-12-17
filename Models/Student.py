@@ -11,5 +11,6 @@ class Student:
 
     def __eq__(self, other) -> bool:
         return self.Id == other.Id and self.Name == other.Name
+
     def __repr__(self):
-        return f"User(id={repr(self.Id)}, name={repr(self.Name)})"
+        return f"student (id={repr(self.Id)}, name={repr(self.Name)})"
