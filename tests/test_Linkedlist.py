@@ -7,10 +7,10 @@ class TestLinkedList(unittest.TestCase):
     def setUp(self):
         self.studentsList = LinkedList()
         # add basic data
-        self.student1 = Student(1, 'ahmed')
-        self.student2 = Student(2, 'eman')
-        self.studentsList.Add(self.student1)
-        self.studentsList.Add(self.student2)
+        student1 = Student(1, 'ahmed')
+        student2 = Student(2, 'eman')
+        self.studentsList.Add(student1)
+        self.studentsList.Add(student2)
 
     def GetNewRandomStudent(self) -> Student:
         return Student(3, 'TestStudent')
