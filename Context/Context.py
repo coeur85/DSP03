@@ -7,7 +7,7 @@ from Models.Student import Student
 from Models.StudentCourse import StudentCourse
 
 
-class Context:
+class Context(Course, Student):
     def __init__(self):
         StudentSize = 10
         CourseSize = 10
@@ -15,18 +15,19 @@ class Context:
         self.Courses()
         self.StudentCourse(StudentSize * CourseSize)
 
-    def SaveToFile(self):
-        with open('Data/studentContext.dbfile', 'wb') as studentContextFile:
-            pickle.dump(self._studentContext, studentContextFile)
+    def __SaveToFile(self, fileName: str, objectToSave):
+        with open(f'Data/{fileName}.dbfile', 'wb') as contextFile:
+            pickle.dump(objectToSave, contextFile)
 
-    def LoadFromFile(self):
-        with open('Data/studentContext.dbfile', 'rb') as studentContextFile:
-            self._studentContext = pickle.load(studentContextFile)
+    def __LoadFromFile(self, fileName: str, objectToLoad):
+        with open(f'Data/{fileName}.dbfile', 'rb') as contextFile:
+            objectToLoad = pickle.load(contextFile)
 
     class Students():
         def __init__(self):
             self._studentList = LinkedList()
             self._currentMaxStudentId = 1
+            studentsFileName = 'students'
 
         def AddNewStudent(self, name):
             newStudent = Student(self._currentMaxStudentId, name)

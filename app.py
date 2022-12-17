@@ -5,6 +5,6 @@ context = Context()
 # context.Students.AddNewStudent(context._studentContext, 'ahmed')
 # context.SaveToFile()
 
-context.LoadFromFile()
+context.__LoadFromFile
 
 context.Students.AddNewStudent(context._studentContext, 'ahmed')
