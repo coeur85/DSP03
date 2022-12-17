@@ -10,9 +10,7 @@ class LinkedList:
 
     def __keyExists(self, key) -> bool:
         current = self.head
-        if current == None:
-            return False
-        while current.next != None:
+        while current != None:
             if current.value.Id != key:
                 current = current.next
             else:

@@ -76,4 +76,10 @@ class TestSelect(TestLinkedList):
         # then
         self.assertEqual(expectedStudent, retrviedStudent)
 
-     
+    def test_ShouldReturnNoneIfStudentDoesNotExisit(self):
+        # gevin
+        newStudent = self.GetNewRandomStudent()
+        # when
+        retrivedStudent = self.studentsList.Select(newStudent.Id)
+        # then
+        self.assertIsNone(retrivedStudent)
