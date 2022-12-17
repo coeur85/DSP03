@@ -35,19 +35,24 @@ class TestAdd(TestHashTable):
         retrivedStudent = self.dataTable.Select(studentToAdd.Id)
         # then
         self.assertEqual(retrivedStudent, studentToAdd)
-
     def test_ShouldThrowExceptionIfKeyLessthan1(self):
         # gevin
-        invaledStudent = Student(-1,'ahmed')
+        invaledStudent = Student(-1, 'ahmed')
         # when
         # then
-        with self.assertRaises(Exception) as _ :
-            self.dataTable.Add(invaledStudent.Id,invaledStudent)
-
+        with self.assertRaises(Exception) as _:
+            self.dataTable.Add(invaledStudent.Id, invaledStudent)
     def test_ShouldThrowExceptionIfKeyBiggerThantableSize(self):
         # gevin
-        invaledStudent = Student(self.arr_size + 1,'ahmed')
+        invaledStudent = Student(self.arr_size + 1, 'ahmed')
         # when
         # then
-        with self.assertRaises(Exception) as _ :
-            self.dataTable.Add(invaledStudent.Id,invaledStudent)
+        with self.assertRaises(Exception) as _:
+            self.dataTable.Add(invaledStudent.Id, invaledStudent)
+    def test_ShouldThrowExceptionIfStudentAlreadyExisits(self):
+        # gevin
+        invaledStudent = self.GetExistingStudent()
+        # when
+        # then
+        with self.assertRaises(Exception) as _:
+            self.dataTable.Add(invaledStudent.Id, invaledStudent)
