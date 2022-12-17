@@ -32,7 +32,6 @@ class LinkedList:
                 current.next = current.next.next
                 self.size -= 1
                 return True
-
             else:
                 current = current.next
         raise RuntimeError("item with value:", value, "was not found")
