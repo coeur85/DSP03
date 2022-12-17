@@ -31,15 +31,20 @@ class Context():
         def __init__(self):
             self._courseList = LinkedList()
             self._currentMaxCourseId = 1
+            self.courseFileName = 'courses'
+            self.storage = StorageBroker()
 
         def AddNewCourse(self, name):
             newCourse = Course(self._currentMaxCourseId, name)
             self._courseList.Add(newCourse)
             self._currentMaxCourseId += 1
+            self.storage.SaveToFile(self.studentsFileName, self)
 
     class StudentCourse():
         def __init__(self, tableSize):
             self._gradesTable = HashTbale(tableSize)
+            self.studentCourseFielName = 'studentCourse'
+            self.storage = StorageBroker()
 
         def __computeKey(self, studentId: int, courseId: int) -> int:
             newKey = f'{studentId}{courseId}'
@@ -49,3 +54,4 @@ class Context():
             key = self.__computeKey(studentId, courseId)
             newStudentCourse = StudentCourse(studentId, courseId, grade)
             self._gradesTable.Add(key, newStudentCourse)
+            self.storage.SaveToFile(self.studentCourseFielName , self)
