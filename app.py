@@ -7,4 +7,4 @@ context = Context()
 
 context.__LoadFromFile
 
-context.Students.AddNewStudent(context._studentContext, 'ahmed')
+context.Students.AddNewStudent()
