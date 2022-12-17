@@ -24,6 +24,12 @@ class TestLinkedList(unittest.TestCase):
         # then
         self.assertEqual(self.studentsList.lenth(), 3)
         self.assertEqual(retrevedStudent, studentToAdd)
+    def test_AddStudentAlreadyExists(self):
+        # gevin
+        studentToAdd = Student(1,'adam')
+        # when
+        # then
+        self.assertRaises(Exception,self.studentsList.Add(studentToAdd))
 
     def test_RemoveStudent(self):
         # gevin
