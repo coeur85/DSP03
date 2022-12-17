@@ -8,15 +8,15 @@ class HashTbale:
         self.status_arr = [0] * (arrSize)
         self.size = arrSize
 
-    def __computeHashkey(key):        # privet method
+    def __computeHashkey(self,key):        # privet method
         return key
 
-    def __validatekey(key):
-        if key.isdigit() == False:
-            raise RuntimeError('the key is not a number, key :', key)
+    def __validatekey(self,key):
         if key < 1:
             raise RuntimeError(
                 'index must be greater than or equal to 1, key :', key)
+        if key > self.size:
+            raise RuntimeError('index is out of range of the hash table')
 
     def Add(self, key, value):
         self.__validatekey(key)
