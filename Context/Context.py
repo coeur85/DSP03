@@ -10,12 +10,12 @@ class Context():
     def __init__(self):
         StudentSize = 10
         CourseSize = 10
-        self._studentContext = self.Students()
-        self._courseContext = self.Courses()
-        self._studentCourseContext = self.StudentCourse(
+        self._studentContext = self.StudentContext()
+        self._courseContext = self.CourseContext()
+        self._studentCourseContext = self.StudentCourseContext(
             StudentSize * CourseSize)
 
-    class Students():
+    class StudentContext():
         def __init__(self):
             self._studentList = LinkedList()
             self._currentMaxStudentId = 1
@@ -35,7 +35,7 @@ class Context():
             self._studentList.Remove(Id)
             self.storage.SaveToFile(self.studentsFileName, self)
 
-    class Courses():
+    class CourseContext():
         def __init__(self):
             self._courseList = LinkedList()
             self._currentMaxCourseId = 1
@@ -50,11 +50,12 @@ class Context():
             self._courseList.Add(newCourse)
             self._currentMaxCourseId += 1
             self.storage.SaveToFile(self.courseFileName, self)
-        def DeleteCourse(self,Id):
+
+        def DeleteCourse(self, Id):
             self._courseList.Remove(Id)
             self.storage.SaveToFile(self.courseFileName, self)
 
-    class StudentCourse():
+    class StudentCourseContext():
         def __init__(self, tableSize):
             self._gradesTable = HashTbale(tableSize)
             self.studentCourseFielName = 'studentCourse'

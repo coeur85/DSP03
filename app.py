@@ -3,4 +3,4 @@ from Context.Context import Context
 context = Context()
 
 
-context.Students.AddNewStudent(context._studentContext, 'ahmed')        #1
+context.StudentContext.AddNewStudent(context._studentContext, 'ahmed')  # 1
