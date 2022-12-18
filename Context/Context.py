@@ -10,7 +10,7 @@ class Context():
         self.__CourseSize = 10
         self.__Students = StudentContext()
         self.__Courses = CourseContext()
-        self.__Grades = GradesContext(self.__StudentSize , self.__CourseSize)
+        self.__Grades = GradesContext(self.__StudentSize, self.__CourseSize)
         self.storage = StorageBroker()
         self.courseFileName = 'courses'
         self.studentsFileName = 'students'
