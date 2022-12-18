@@ -2,20 +2,20 @@ from DataStructure.HashTable import HashTbale
 from Models.StudentCourse import StudentCourse
 
 
-
 class GradesContext():
-    def __init__(self, studentSize,coursesize):
+    def __init__(self, studentSize, coursesize):
         self.__studentSize = studentSize
         self.__courseSize = coursesize
         self._gradesTable = HashTbale(studentSize * coursesize)
         self.studentCourseFielName = 'grades'
 
     def __computeKey(self, studentId: int, courseId: int) -> int:
-        if courseId == self.__courseSize: # last key of the arry
-            return (studentId + 1) * self.__courseSize 
-        newKey = f'{studentId}{courseId}'
-        return int(newKey)
-
+        newStudentId = studentId - 1
+        newCourseId = courseId - 1
+        stringNewId = f'{newStudentId}{newCourseId}'
+        newKey = int(stringNewId) + 1
+        return newKey
+        
     def AddCourseToStudent(self, studentId, courseId, grade):
         key = self.__computeKey(studentId, courseId)
         newStudentCourse = StudentCourse(studentId, courseId, grade)
