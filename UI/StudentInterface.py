@@ -3,8 +3,7 @@ from Context.Context import Context
 
 
 class StudentInterface():
-    def __init__(self, promot: Prompt, context: Context):
-        self.promote = promot
+    def __init__(self, context: Context):
         self.context = context
 
     def AddNewStudent(self):

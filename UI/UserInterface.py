@@ -1,5 +1,6 @@
 from UI import StudentInterface
 from rich.prompt import Prompt
+from Context.Context import Context
 
 
 class UserInterface():
@@ -17,7 +18,8 @@ class UserInterface():
     back: str = 'back'
 
     def __init__(self):
-        self.studentInterface = StudentInterface()
+        self.context = Context()
+        self.studentInterface = StudentInterface(self.context)
 
     def HomePage(self):
         choices = [self.student, self.course]
