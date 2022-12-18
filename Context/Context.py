@@ -1,6 +1,7 @@
 from Context.CoursesContext import CourseContext
 from Context.StudentsContext import StudentContext
 from Context.GradesContext import GradesContext
+from Storage.Broker.StorageBroker import StorageBroker
 
 
 class Context():
@@ -10,29 +11,55 @@ class Context():
         self.__Students = StudentContext()
         self.__Courses = CourseContext()
         self.__Grades = GradesContext(StudentSize * CourseSize)
+        self.storage = StorageBroker()
+        self.courseFileName = 'courses'
+        self.studentsFileName = 'students'
+        self.gradeFileName = 'grades'
+        self.storage = StorageBroker()
+
+        newObject = self.storage.LoadFromFile(self.studentsFileName)
+        if newObject != None:
+            self.__Students = newObject
+        newObject = self.storage.LoadFromFile(self.courseFileName)
+        if newObject != None:
+            self.__Courses = newObject
+        newObject = self.storage.LoadFromFile(self.gradeFileName)
+        if newObject != None:
+            self.__Grades = newObject
+
+    def __saveAll(self):
+        self.storage.SaveToFile(self.studentsFileName, self.__Students)
+        self.storage.SaveToFile(self.courseFileName, self.__Courses)
+        self.storage.SaveToFile(self.gradeFileName, self.__Grades)
 
     def StudentsAddNew(self, name: str):
         self.__Students.AddNewStudent(name)
+        self.__saveAll()
 
     def StudentsDelete(self, Id):
-        self.__Students.Remove(Id)
+        self.__Students.DeleteStudent(Id)
         courseIdToDelete = Id * 10
         while courseIdToDelete < ((Id * 10) - 1):
-            self.RemoveCourseFromStudent(Id, courseIdToDelete)
+            self.GradeRemove(Id, courseIdToDelete)
             courseIdToDelete += 1
+        self.__saveAll()
 
     def CourseAddNew(self, name: str):
         self.__Courses.AddNewCourse(name)
+        self.__saveAll()
 
     def CourseDelete(self, Id):
-        self.__Courses.Remove(Id)
+        self.__Courses.DeleteCourse(Id)
         studentIdToDelete = 1
         while studentIdToDelete < (len(self._gradesTable.size)):
-            self.RemoveCourseFromStudent(studentIdToDelete, Id)
+            self.GradeRemove(studentIdToDelete, Id)
             studentIdToDelete += 10
+        self.__saveAll()
 
     def GradeAddNew(self, studentId, courseId, grade):
         self.__Grades.AddCourseToStudent(studentId, courseId, grade)
+        self.__saveAll()
 
     def GradeRemove(self, studentId, courseId):
         self.__Grades.RemoveCourseFromStudent(studentId, courseId)
+        self.__saveAll()
