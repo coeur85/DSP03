@@ -33,50 +33,74 @@ class Context():
         self.storage.SaveToFile(self.gradeFileName, self.__Grades)
 
     def StudentsAddNew(self, name: str):
-        self.__Students.AddNewStudent(name)
-        self.__saveAll()
+        try:
+            self.__Students.AddNewStudent(name)
+            self.__saveAll()
+        except Exception as ex:
+            print(ex)
 
     def StudentsDelete(self, Id):
-        self.__Students.DeleteStudent(Id)
-        courseIdToDelete = 1
-        while courseIdToDelete <= self.__CourseSize:
-            self.GradeRemove(Id, courseIdToDelete)
-            courseIdToDelete += 1
-        self.__saveAll()
+        try:
+            self.__Students.DeleteStudent(Id)
+            courseIdToDelete = 1
+            while courseIdToDelete <= self.__CourseSize:
+                self.GradeRemove(Id, courseIdToDelete)
+                courseIdToDelete += 1
+            self.__saveAll()
+        except Exception as ex:
+            print(ex)
 
     def StudentsUpdate(self, Id, Name):
-        self.__Students.UpdateStudent(Id, Name)
-        self.__saveAll()
+        try:
+            self.__Students.UpdateStudent(Id, Name)
+            self.__saveAll()
+        except Exception as ex:
+            print(ex)
 
     def StudnetsPrint(self):
         self.__Students.PrintAll()
 
     def CourseAddNew(self, name: str):
-        self.__Courses.AddNewCourse(name)
-        self.__saveAll()
+        try:
+            self.__Courses.AddNewCourse(name)
+            self.__saveAll()
+        except Exception as ex:
+            print(ex)
 
     def CourseDelete(self, Id):
-        self.__Courses.DeleteCourse(Id)
-        studentIdToDelete = 1
-        while studentIdToDelete <= self.__StudentSize:
-            self.GradeRemove(studentIdToDelete, Id)
-            studentIdToDelete += 1
-        self.__saveAll()
+        try:
+            self.__Courses.DeleteCourse(Id)
+            studentIdToDelete = 1
+            while studentIdToDelete <= self.__StudentSize:
+                self.GradeRemove(studentIdToDelete, Id)
+                studentIdToDelete += 1
+            self.__saveAll()
+        except Exception as ex:
+            print(ex)
 
     def CourseUpdate(self, Id, name):
-        self.__Courses.UpdateCourse(id, name)
-        self.__saveAll()
+        try:
+            self.__Courses.UpdateCourse(id, name)
+            self.__saveAll()
+        except Exception as ex:
+            print(ex)
 
     def CoursesPrint(self):
         self.__Courses.PrintAll()
 
     def GradeAddNew(self, studentId, courseId, grade):
-        self.__Grades.AddCourseToStudent(studentId, courseId, grade)
-        self.__saveAll()
+        try:
+            self.__Grades.AddCourseToStudent(studentId, courseId, grade)
+            self.__saveAll()
+        except Exception as ex:
+            print(ex)
 
     def GradeRemove(self, studentId, courseId):
-        self.__Grades.RemoveCourseFromStudent(studentId, courseId)
-        self.__saveAll()
+        try:
+            self.__Grades.RemoveCourseFromStudent(studentId, courseId)
+            self.__saveAll()
+        except Exception as ex:
+            print(ex)
 
     def GradesForStudent(self, studentId):
         student = self.__Students.SelectStudent(studentId)
