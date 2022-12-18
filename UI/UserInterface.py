@@ -1,4 +1,4 @@
-from UI import StudentInterface
+from UI.StudentInterface import StudentInterface
 from rich.prompt import Prompt
 from Context.Context import Context
 
@@ -50,3 +50,4 @@ class UserInterface():
                 self.studentInterface.AddGradeForStudent()
             case self.back:
                 self.HomePage()
+        self.StudentsPage()

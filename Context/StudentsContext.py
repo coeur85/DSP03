@@ -26,4 +26,4 @@ class StudentContext():
     def UpdateStudent(self, key, name):
         dbStudent = self._studentList.Select(key)
         dbStudent.Name = name
-        self.UpdateStudent(key, dbStudent)
+        self._studentList.Update(key, dbStudent)
