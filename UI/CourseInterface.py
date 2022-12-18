@@ -31,3 +31,8 @@ class CourseInterface():
         studentId = IntPrompt.ask('enter student Id')
         grade = IntPrompt.ask('enter Course grade scoor for this student')
         self.context.GradeAddNew(studentId, courseId,  grade)
+
+    def RemoveGradeFormCourse(self):
+        courseId = IntPrompt.ask('enter Course Id')
+        studentId = IntPrompt.ask('enter student Id')
+        self.context.GradeRemove(studentId, courseId)
