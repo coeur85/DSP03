@@ -39,30 +39,6 @@ class Context():
             self._gradesTable.Remove(key)
             self.storage.SaveToFile(self.studentCourseFielName, self)
 
-    class StudentContext(StudentCourseContext):
-        def __init__(self):
-            self._studentList = LinkedList()
-            self._currentMaxStudentId = 1
-            self.studentsFileName = 'students'
-            self.storage = StorageBroker()
-            newObject = self.storage.LoadFromFile(self.studentsFileName)
-            if newObject != None:
-                self = newObject
-
-        def AddNewStudent(self, name):
-            newStudent = Student(self._currentMaxStudentId, name)
-            self._studentList.Add(newStudent)
-            self._currentMaxStudentId += 1
-            self.storage.SaveToFile(self.studentsFileName, self)
-
-        def DeleteStudent(self, Id: int):
-            self._studentList.Remove(Id)
-            self.storage.SaveToFile(self.studentsFileName, self)
-            courseIdToDelete = Id * 10
-            while courseIdToDelete < ((Id * 10) - 1):
-                self.RemoveCourseFromStudent(Id, courseIdToDelete)
-                courseIdToDelete += 1
-
     class CourseContext(StudentCourseContext):
         def __init__(self):
             self._courseList = LinkedList()
