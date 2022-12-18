@@ -8,9 +8,14 @@ class StudentInterface():
         self.context = context
 
     def AddNewStudent(self):
-        studentName = self.promote.ask('enter student name')
+        studentName = Prompt.ask('enter student name')
         self.context.StudentsAddNew(studentName)
 
     def DeleteStudent(self):
         studentId = IntPrompt.ask('enter student Id')
         self.context.StudentsDelete(studentId)
+
+    def UpdateStudent(self):
+        studentId = IntPrompt.ask('enter student Id')
+        studentName = Prompt.ask('enter student new name')
+    
