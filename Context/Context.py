@@ -52,7 +52,7 @@ class Context():
             self.__Students.DeleteStudent(Id)
             courseIdToDelete = 1
             while courseIdToDelete <= self.__CourseSize:
-                self.GradeRemove(Id, courseIdToDelete)
+                self.GradeTryToRemove(Id, courseIdToDelete)
                 courseIdToDelete += 1
             self.__saveAll()
         except Exception as ex:
@@ -80,7 +80,7 @@ class Context():
             self.__Courses.DeleteCourse(Id)
             studentIdToDelete = 1
             while studentIdToDelete <= self.__StudentSize:
-                self.GradeRemove(studentIdToDelete, Id)
+                self.GradeTryToRemove(studentIdToDelete, Id)
                 studentIdToDelete += 1
             self.__saveAll()
         except Exception as ex:
@@ -88,7 +88,7 @@ class Context():
 
     def CourseUpdate(self, Id, name):
         try:
-            self.__Courses.UpdateCourse(id, name)
+            self.__Courses.UpdateCourse(Id, name)
             self.__saveAll()
         except Exception as ex:
             print(ex)
@@ -106,9 +106,15 @@ class Context():
 
     def GradeRemove(self, studentId, courseId):
         try:
-            self.__ValidateGradeAddRemove(studentId,courseId)
-            self.__Grades.RemoveCourseFromStudent(studentId, courseId)
+            self.__ValidateGradeAddRemove(studentId, courseId)
+            self.GradeTryToRemove(studentId, courseId)
             self.__saveAll()
+        except Exception as ex:
+            print(ex)
+
+    def GradeTryToRemove(self, studentId, courseId):
+        try:
+            self.__Grades.RemoveCourseFromStudent(studentId, courseId)
         except Exception as ex:
             print(ex)
 

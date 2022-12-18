@@ -50,7 +50,7 @@ class AppUserInterface():
                 self.studentInterface.PrintStudentCourses()
             case self.addGrade:
                 self.studentInterface.AddGradeForStudent()
-            case self.removeGarde:
+            case self.removeGrade:
                 self.studentInterface.RemoveGradeFormStudent()
             case self.back:
                 self.HomePage()
@@ -60,7 +60,7 @@ class AppUserInterface():
         choices = [self.add, self.remove, self.update,
                    self.reportAll, self.reportOne, self.addGrade, self.removeGrade, self.back]
         response = Prompt.ask(
-            "What do u what wish to do with students?", choices=choices)
+            "What do u what wish to do with courses?", choices=choices)
         match response:
             case self.add:
                 self.courseInterface.AddNewCourse()

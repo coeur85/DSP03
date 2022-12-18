@@ -1,5 +1,5 @@
 from DataStructure.HashTable import HashTbale
-from Models.StudentCourse import Grade
+from Models.Grade import Grade
 
 
 class GradesContext():
