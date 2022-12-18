@@ -23,3 +23,8 @@ class CourseContext():
     def SelectCourse(self, courseId):
         course = self._courseList.Select(courseId)
         return course
+
+    def UpdateCourse(self, key, name):
+        dbCourse = self._courseList.Select(key)
+        dbCourse.Name = name
+        self._courseList.Update(key, dbCourse)

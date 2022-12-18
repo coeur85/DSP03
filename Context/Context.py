@@ -44,6 +44,10 @@ class Context():
             courseIdToDelete += 1
         self.__saveAll()
 
+    def StudentsUpdate(self, Id, Name):
+        self.__Students.UpdateStudent(Id, Name)
+        self.__saveAll()
+
     def StudnetsPrint(self):
         self.__Students.PrintAll()
 
@@ -57,6 +61,10 @@ class Context():
         while studentIdToDelete <= self.__StudentSize:
             self.GradeRemove(studentIdToDelete, Id)
             studentIdToDelete += 1
+        self.__saveAll()
+
+    def CourseUpdate(self, Id, name):
+        self.__Courses.UpdateCourse(id, name)
         self.__saveAll()
 
     def CoursesPrint(self):
