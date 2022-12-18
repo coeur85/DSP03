@@ -1,5 +1,5 @@
-from UI.UserInterface import UserInterface
+from UI.AppUserInterface import AppUserInterface
 
 
-ui = UserInterface()
+ui = AppUserInterface()
 ui.HomePage()
