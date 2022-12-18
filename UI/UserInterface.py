@@ -1,3 +1,4 @@
+import errno
 from rich.prompt import Prompt
 
 
