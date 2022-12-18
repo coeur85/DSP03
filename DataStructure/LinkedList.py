@@ -67,11 +67,16 @@ class LinkedList:
             raise RuntimeError('data list is empty, nothing to update')
         if self.__keyExists(key) == False:
             raise RuntimeError("item with key:", key, "was not found")
+        if self.head.value.Id == key:
+            self.head.value = value
+            return True
         while current.next != None:
-            if current.value.Id != key:
+            if current.next.value.Id != key:
                 current = current.next
             else:
-                current.value = value
+                current.next.value = value
+                return True
+        return False
 
     def Print(self):
         current = self.head

@@ -24,10 +24,10 @@ class CourseInterface():
 
     def PrintCourseCourses(self):
         courseId = IntPrompt.ask('enter Course Id')
-        self.context.GradesForCourse(courseId)
+        self.context.GradeForCourse(courseId)
 
     def AddGradeForCourse(self):
-        CourseId = IntPrompt.ask('enter Course Id')
+        courseId = IntPrompt.ask('enter Course Id')
         studentId = IntPrompt.ask('enter student Id')
         grade = IntPrompt.ask('enter Course grade scoor for this student')
-        self.context.GradeAddNew(CourseId, studentId, grade)
+        self.context.GradeAddNew(studentId, courseId,  grade)

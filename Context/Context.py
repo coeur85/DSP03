@@ -82,18 +82,20 @@ class Context():
         student = self.__Students.SelectStudent(studentId)
         gradesList = self.__Grades.SelectStudentCouresList(studentId)
         print(student)
-        print('----his/her course list-----')
-        for grade in gradesList:
-            course = self.__Courses.SelectCourse(grade.CourseId)
-            print(f'{course}, his/her scoore: {grade.Grade}')
+        if len(gradesList) > 0:
+            print('----his/her course list-----')
+            for grade in gradesList:
+                course = self.__Courses.SelectCourse(grade.CourseId)
+                print(f'{course}, his/her scoore: {grade.Grade}')
         print(f'---- end of report with {len(gradesList)} course')
 
     def GradeForCourse(self, courseId):
-        student = self.__Courses.SelectCourse(courseId)
+        course = self.__Courses.SelectCourse(courseId)
         gradesList = self.__Grades.SelectCoureStudentList(courseId)
-        print(student)
-        print('----its student list-----')
-        for grade in gradesList:
-            student = self.__Students.SelectStudent(grade.StudentId)
-            print(f'{student}, his/her scoore: {grade.Grade}')
+        print(course)
+        if len(gradesList) > 0:
+            print('----its student list-----')
+            for grade in gradesList:
+                course = self.__Students.SelectStudent(grade.StudentId)
+                print(f'{course}, his/her scoore: {grade.Grade}')
         print(f'---- end of report with {len(gradesList)} student')

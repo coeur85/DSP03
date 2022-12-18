@@ -1,5 +1,5 @@
 from UI.StudentInterface import StudentInterface
-from UI.StudentInterface import CourseInterface
+from UI.CourseInterface import CourseInterface
 from rich.prompt import Prompt
 from Context.Context import Context
 
@@ -54,7 +54,7 @@ class AppUserInterface():
                 self.HomePage()
         self.StudentsPage()
 
-    def CoiursesPage(self):
+    def CoursePage(self):
         choices = [self.add, self.remove, self.update,
                    self.reportAll, self.reportOne, self.addgrade, self.back]
         response = Prompt.ask(
@@ -74,4 +74,4 @@ class AppUserInterface():
                 self.courseInterface.AddGradeForCourse()
             case self.back:
                 self.HomePage()
-        self.CoiursesPage()
+        self.CoursePage()

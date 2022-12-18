@@ -42,7 +42,7 @@ class GradesContext():
         outputList = list()
         while studentIdToSelect <= (self.__studentSize):
             searchKey = self.__computeKey(studentIdToSelect,courseId)
-            grade = self._gradesTable.Select(studentIdToSelect)
+            grade = self._gradesTable.Select(searchKey)
             if grade != None:
                 if grade.CourseId == courseId:
                     outputList.append(grade)
