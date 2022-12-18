@@ -71,6 +71,11 @@ class Context():
         self.__saveAll()
 
     def GradeStudentGrades(self, studentId):
-        student = self.__Students.Select(studentId)
-        list = self.__Grades.PrintStudentCoures(studentId)
-        print(list)
+        student = self.__Students.SelectStudent(studentId)
+        gradesList = self.__Grades.PrintStudentCoures(studentId)
+        print(student)
+        print('----his/her course list-----')
+        for grade in gradesList :
+            course = self.__Courses.SelectCourse(grade.CourseId)
+            print(f'{course}, his/her scoore: {grade.Grade}')
+        print(f'---- end of report with {len(gradesList)} recoreds')
