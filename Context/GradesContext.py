@@ -25,13 +25,26 @@ class GradesContext():
         key = self.__computeKey(studentId, courseId)
         self._gradesTable.Remove(key)
 
-    def PrintStudentCoures(self, studentId) -> list:
-        i = 1
+    def SelectStudentCouresList(self, studentId) -> list:
+        courseIdToSelect = 1
         outputList = list()
-        while i <= (self.__studentSize * self.__courseSize):
-            grade = self._gradesTable.Select(i)
+        while courseIdToSelect <= (self.__courseSize):
+            searchKey = self.__computeKey(studentId,courseIdToSelect)
+            grade = self._gradesTable.Select(searchKey)
             if grade != None:
                 if grade.StudentId == studentId:
                     outputList.append(grade)
-            i += 1
+            courseIdToSelect += 1
+        return outputList
+
+    def SelectCoureStudentList(self, courseId) -> list:
+        studentIdToSelect = 1
+        outputList = list()
+        while studentIdToSelect <= (self.__studentSize):
+            searchKey = self.__computeKey(studentIdToSelect,courseId)
+            grade = self._gradesTable.Select(studentIdToSelect)
+            if grade != None:
+                if grade.CourseId == courseId:
+                    outputList.append(grade)
+            studentIdToSelect += 1
         return outputList

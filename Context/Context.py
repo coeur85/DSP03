@@ -70,12 +70,22 @@ class Context():
         self.__Grades.RemoveCourseFromStudent(studentId, courseId)
         self.__saveAll()
 
-    def GradeStudentGrades(self, studentId):
+    def GradesForStudent(self, studentId):
         student = self.__Students.SelectStudent(studentId)
-        gradesList = self.__Grades.PrintStudentCoures(studentId)
+        gradesList = self.__Grades.SelectStudentCouresList(studentId)
         print(student)
         print('----his/her course list-----')
-        for grade in gradesList :
+        for grade in gradesList:
             course = self.__Courses.SelectCourse(grade.CourseId)
             print(f'{course}, his/her scoore: {grade.Grade}')
-        print(f'---- end of report with {len(gradesList)} recoreds')
+        print(f'---- end of report with {len(gradesList)} course')
+
+    def GradeForCourse(self, courseId):
+        student = self.__Courses.SelectCourse(courseId)
+        gradesList = self.__Grades.SelectCoureStudentList(courseId)
+        print(student)
+        print('----its student list-----')
+        for grade in gradesList:
+            student = self.__Students.SelectStudent(grade.StudentId)
+            print(f'{student}, his/her scoore: {grade.Grade}')
+        print(f'---- end of report with {len(gradesList)} student')
