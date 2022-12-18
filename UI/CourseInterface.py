@@ -12,7 +12,8 @@ class CourseInterface():
 
     def DeleteCourse(self):
         courseId = IntPrompt.ask('enter Course Id')
-        self.context.CourseDelete(courseId)
+        if Confirm.ask('are you sure'):
+            self.context.CourseDelete(courseId)
 
     def UpdateCourse(self):
         courseId = IntPrompt.ask('enter Course Id')
@@ -35,4 +36,5 @@ class CourseInterface():
     def RemoveGradeFormCourse(self):
         courseId = IntPrompt.ask('enter Course Id')
         studentId = IntPrompt.ask('enter student Id')
-        self.context.GradeRemove(studentId, courseId)
+        if Confirm.ask('are you sure'):
+            self.context.GradeRemove(studentId, courseId)
