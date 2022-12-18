@@ -33,9 +33,9 @@ class HashTbale:
         index = key - 1
         hash_key = self.__computeHashkey(index)
         if self.status_arr[hash_key] == self.cell_is_empty:
-            raise RuntimeError('this key does not existis, key code', key)
+            return False
         self.key_arr[hash_key] = None
-        self.key_arr[hash_key] = None
+        self.data_arr[hash_key] = None
         self.status_arr[hash_key] = self.cell_is_empty
 
     def Select(self, key):

@@ -6,11 +6,11 @@ from Storage.Broker.StorageBroker import StorageBroker
 
 class Context():
     def __init__(self):
-        StudentSize = 10
-        CourseSize = 10
+        self.__StudentSize = 10
+        self.__CourseSize = 10
         self.__Students = StudentContext()
         self.__Courses = CourseContext()
-        self.__Grades = GradesContext(StudentSize * CourseSize)
+        self.__Grades = GradesContext(self.__StudentSize , self.__CourseSize)
         self.storage = StorageBroker()
         self.courseFileName = 'courses'
         self.studentsFileName = 'students'
@@ -38,8 +38,8 @@ class Context():
 
     def StudentsDelete(self, Id):
         self.__Students.DeleteStudent(Id)
-        courseIdToDelete = Id * 10
-        while courseIdToDelete < ((Id * 10) - 1):
+        courseIdToDelete = 1
+        while courseIdToDelete <= self.__CourseSize:
             self.GradeRemove(Id, courseIdToDelete)
             courseIdToDelete += 1
         self.__saveAll()
@@ -51,9 +51,9 @@ class Context():
     def CourseDelete(self, Id):
         self.__Courses.DeleteCourse(Id)
         studentIdToDelete = 1
-        while studentIdToDelete < (len(self._gradesTable.size)):
+        while studentIdToDelete <= self.__StudentSize:
             self.GradeRemove(studentIdToDelete, Id)
-            studentIdToDelete += 10
+            studentIdToDelete += 1
         self.__saveAll()
 
     def GradeAddNew(self, studentId, courseId, grade):
