@@ -11,7 +11,7 @@ class StorageBroker:
             pickle.dump(objectToSave, contextFile)
 
     def LoadFromFile(self, fileName: str):
-        if os.path(f'{self.path}/{fileName}.dbfile') != True:
+        if os.path.isfile(f'{self.path}/{fileName}.dbfile') != True:
             return None
         with open(f'{self.path}/{fileName}.dbfile', 'rb') as contextFile:
             objectToLoad = pickle.load(contextFile)
