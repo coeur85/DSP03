@@ -15,46 +15,6 @@ class Context():
         self._studentCourseContext = self.StudentCourseContext(
             StudentSize * CourseSize)
 
-    class StudentContext():
-        def __init__(self):
-            self._studentList = LinkedList()
-            self._currentMaxStudentId = 1
-            self.studentsFileName = 'students'
-            self.storage = StorageBroker()
-            newObject = self.storage.LoadFromFile(self.studentsFileName)
-            if newObject != None:
-                self = newObject
-
-        def AddNewStudent(self, name):
-            newStudent = Student(self._currentMaxStudentId, name)
-            self._studentList.Add(newStudent)
-            self._currentMaxStudentId += 1
-            self.storage.SaveToFile(self.studentsFileName, self)
-
-        def DeleteStudent(self, Id: int):
-            self._studentList.Remove(Id)
-            self.storage.SaveToFile(self.studentsFileName, self)
-
-    class CourseContext():
-        def __init__(self):
-            self._courseList = LinkedList()
-            self._currentMaxCourseId = 1
-            self.courseFileName = 'courses'
-            self.storage = StorageBroker()
-            newObject = self.storage.LoadFromFile(self.courseFileName)
-            if newObject != None:
-                self = newObject
-
-        def AddNewCourse(self, name):
-            newCourse = Course(self._currentMaxCourseId, name)
-            self._courseList.Add(newCourse)
-            self._currentMaxCourseId += 1
-            self.storage.SaveToFile(self.courseFileName, self)
-
-        def DeleteCourse(self, Id):
-            self._courseList.Remove(Id)
-            self.storage.SaveToFile(self.courseFileName, self)
-
     class StudentCourseContext():
         def __init__(self, tableSize):
             self._gradesTable = HashTbale(tableSize)
@@ -78,3 +38,47 @@ class Context():
             key = self.__computeKey(studentId, courseId)
             self._gradesTable.Remove(key)
             self.storage.SaveToFile(self.studentCourseFielName, self)
+
+    class StudentContext(StudentCourseContext):
+        def __init__(self):
+            self._studentList = LinkedList()
+            self._currentMaxStudentId = 1
+            self.studentsFileName = 'students'
+            self.storage = StorageBroker()
+            newObject = self.storage.LoadFromFile(self.studentsFileName)
+            if newObject != None:
+                self = newObject
+
+        def AddNewStudent(self, name):
+            newStudent = Student(self._currentMaxStudentId, name)
+            self._studentList.Add(newStudent)
+            self._currentMaxStudentId += 1
+            self.storage.SaveToFile(self.studentsFileName, self)
+
+        def DeleteStudent(self, Id: int):
+            self._studentList.Remove(Id)
+            self.storage.SaveToFile(self.studentsFileName, self)
+            courseIdToDelete = Id * 10
+            while courseIdToDelete < ((Id * 10) - 1):
+                self.RemoveCourseFromStudent(Id, courseIdToDelete)
+                courseIdToDelete += 1
+
+    class CourseContext():
+        def __init__(self):
+            self._courseList = LinkedList()
+            self._currentMaxCourseId = 1
+            self.courseFileName = 'courses'
+            self.storage = StorageBroker()
+            newObject = self.storage.LoadFromFile(self.courseFileName)
+            if newObject != None:
+                self = newObject
+
+        def AddNewCourse(self, name):
+            newCourse = Course(self._currentMaxCourseId, name)
+            self._courseList.Add(newCourse)
+            self._currentMaxCourseId += 1
+            self.storage.SaveToFile(self.courseFileName, self)
+
+        def DeleteCourse(self, Id):
+            self._courseList.Remove(Id)
+            self.storage.SaveToFile(self.courseFileName, self)
