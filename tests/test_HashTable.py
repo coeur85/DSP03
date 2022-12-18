@@ -71,14 +71,14 @@ class TestRemove(TestHashTable):
         # then
         self.assertIsNone(dbStudent)
 
-    def test_ShouldThrowErrorIfStudentAlreadyRemoved(self):
+    def test_ShouldReturnFalseIfStudentAlreadyRemoved(self):
         # gevin
         exisitingStudent = self.GetExistingStudent()
         self.dataTable.Remove(exisitingStudent.Id)
         # when
+        retrivedStudent = self.dataTable.Remove(exisitingStudent.Id)
         # then
-        with self.assertRaises(Exception) as _:
-            self.dataTable.Remove(exisitingStudent.Id)
+        self.assertFalse(retrivedStudent)
 
 
 class TestSelect(TestHashTable):
@@ -112,10 +112,11 @@ class TestUpdate(TestHashTable):
         updatedStudent = self.dataTable.Select(exisitingStudent.Id)
         # then
         self.assertEqual(expectedUpdatedStudent, updatedStudent)
+
     def test_ShouldThrowErrorIfKeyDoesNotExisits(self):
         # gvin
         newStudent = self.GetNewRandomStudent()
         # when
         # then
         with self.assertRaises(Exception) as _:
-            self.dataTable.Update(newStudent.Id,newStudent)
+            self.dataTable.Update(newStudent.Id, newStudent)
