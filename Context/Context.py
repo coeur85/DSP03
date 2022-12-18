@@ -32,6 +32,14 @@ class Context():
         self.storage.SaveToFile(self.courseFileName, self.__Courses)
         self.storage.SaveToFile(self.gradeFileName, self.__Grades)
 
+    def __ValidateGradeAddRemove(self, studentId, courseId):
+        student = self.__Students.SelectStudent(studentId)
+        if student == None:
+            raise RuntimeError('invaled studet id')
+        course = self.__Courses.SelectCourse(courseId)
+        if course == None:
+            raise RuntimeError('invalied course id')
+
     def StudentsAddNew(self, name: str):
         try:
             self.__Students.AddNewStudent(name)
@@ -90,6 +98,7 @@ class Context():
 
     def GradeAddNew(self, studentId, courseId, grade):
         try:
+            self.__ValidateGradeAddRemove(studentId, courseId)
             self.__Grades.AddCourseToStudent(studentId, courseId, grade)
             self.__saveAll()
         except Exception as ex:
@@ -97,6 +106,7 @@ class Context():
 
     def GradeRemove(self, studentId, courseId):
         try:
+            self.__ValidateGradeAddRemove(studentId,courseId)
             self.__Grades.RemoveCourseFromStudent(studentId, courseId)
             self.__saveAll()
         except Exception as ex:
