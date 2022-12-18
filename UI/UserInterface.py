@@ -1,4 +1,4 @@
-import errno
+from UI import StudentInterface
 from rich.prompt import Prompt
 
 
@@ -6,7 +6,9 @@ class UserInterface():
     add: str = 'add'
     remove: str = 'remove'
     update: str = 'update'
-    report: str = 'report'
+    reportAll: str = 'showAll'
+    reportOne: str = 'showOne'
+    addgrade: str = 'addGrade'
 
     student: str = 'student'
     course: str = 'course'
@@ -14,38 +16,35 @@ class UserInterface():
 
     back: str = 'back'
 
+    def __init__(self):
+        self.studentInterface = StudentInterface()
+
     def HomePage(self):
-        choices = [self.add, self.remove, self.update, self.report]
-        response = Prompt.ask("What do u wich to do ?", choices=choices)
+        choices = [self.student, self.course]
+        response = Prompt.ask("What do u wish to work on ?", choices=choices)
+        match response:
+            case self.student:
+                self.StudentsPage()
+            case self.course:
+                self.CoursePage()
+
+    def StudentsPage(self):
+        choices = [self.add, self.remove, self.update,
+                   self.reportAll, self.reportOne, self.addgrade, self.back]
+        response = Prompt.ask(
+            "What do u what to do with students?", choices=choices)
         match response:
             case self.add:
-                self.AddPage()
+                self.studentInterface.AddNewStudent()
             case self.remove:
-                self.RemovePage()
-            case self.Update:
-                self.UpdatePage()
-            case self.report:
-                self.ReportPage()
-
-    def AddPage(self):
-        choices = [self.student, self.course, self.grade, self.back]
-        response = Prompt.ask("What do you want to add ?", choices=choices)
-        match response:
+                self.studentInterface.DeleteStudent()
+            case self.update:
+                self.studentInterface.UpdateStudent()
+            case self.reportAll:
+                self.studentInterface.PrintAllStudents()
+            case self.reportOne:
+                self.studentInterface.PrintStudentCourses()
+            case self.addgrade:
+                self.studentInterface.AddGradeForStudent()
             case self.back:
                 self.HomePage()
-
-    def RemovePage(self):
-        choices = ["Student", "Course", 'Grade', '<-- Back']
-        response = Prompt.ask("What do you want to delete ?",
-                              choices=choices, show_choices=True)
-
-    def UpdatePage(self):
-        choices = ["Student", "Course", '<-- Back']
-        response = Prompt.ask("What do you want to add ?",
-                              choices=choices, show_choices=True)
-
-    def ReportPage(self):
-        choices = ["All Students", "All Courses", 'Spasfic student course',
-                   'Spasfic course studnets', '<-- Back']
-        response = Prompt.ask("What do you want to add ?",
-                              choices=choices, show_choices=True)

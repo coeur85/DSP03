@@ -26,3 +26,8 @@ class StudentInterface():
     def PrintStudentCourses(self):
         studentId = IntPrompt.ask('enter student Id')
         self.context.GradesForStudent(studentId)
+    def AddGradeForStudent(self):
+        studentId = IntPrompt.ask('enter student Id')
+        courseId = IntPrompt.ask('enter course Id')
+        grade = IntPrompt.ask('enter student grade scoor for this course')
+        self.context.GradeAddNew(studentId,courseId,grade)
