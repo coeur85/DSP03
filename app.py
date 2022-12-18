@@ -4,5 +4,7 @@ context = Context()
 
 
 
-context.StudnetsPrint()
-context.CoursesPrint()
+# context.StudnetsPrint()
+# context.CoursesPrint()
+
+context.GradeStudentGrades(1)

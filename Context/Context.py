@@ -61,6 +61,7 @@ class Context():
 
     def CoursesPrint(self):
         self.__Courses.PrintAll()
+
     def GradeAddNew(self, studentId, courseId, grade):
         self.__Grades.AddCourseToStudent(studentId, courseId, grade)
         self.__saveAll()
@@ -68,3 +69,8 @@ class Context():
     def GradeRemove(self, studentId, courseId):
         self.__Grades.RemoveCourseFromStudent(studentId, courseId)
         self.__saveAll()
+
+    def GradeStudentGrades(self, studentId):
+        student = self.__Students.Select(studentId)
+        list = self.__Grades.PrintStudentCoures(studentId)
+        print(list)
