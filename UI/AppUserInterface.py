@@ -10,11 +10,11 @@ class AppUserInterface():
     update: str = 'update'
     reportAll: str = 'showAll'
     reportOne: str = 'showOne'
-    addgrade: str = 'addGrade'
+    addGrade: str = 'addGrade'
+    removeGrade: str = 'removeGrade'
 
     student: str = 'student'
     course: str = 'course'
-    grade: str = 'grade'
 
     back: str = 'back'
 
@@ -34,7 +34,7 @@ class AppUserInterface():
 
     def StudentsPage(self):
         choices = [self.add, self.remove, self.update,
-                   self.reportAll, self.reportOne, self.addgrade, self.back]
+                   self.reportAll, self.reportOne, self.addGrade, self.removeGrade, self.back]
         response = Prompt.ask(
             "What do u wish to do with students?", choices=choices)
         match response:
@@ -48,15 +48,17 @@ class AppUserInterface():
                 self.studentInterface.PrintAllStudents()
             case self.reportOne:
                 self.studentInterface.PrintStudentCourses()
-            case self.addgrade:
+            case self.addGrade:
                 self.studentInterface.AddGradeForStudent()
+            case self.removeGarde:
+                self.studentInterface.RemoveGradeFormStudent()
             case self.back:
                 self.HomePage()
         self.StudentsPage()
 
     def CoursePage(self):
         choices = [self.add, self.remove, self.update,
-                   self.reportAll, self.reportOne, self.addgrade, self.back]
+                   self.reportAll, self.reportOne, self.addGrade, self.removeGrade, self.back]
         response = Prompt.ask(
             "What do u what wish to do with students?", choices=choices)
         match response:
@@ -70,8 +72,10 @@ class AppUserInterface():
                 self.courseInterface.PrintAllCourses()
             case self.reportOne:
                 self.courseInterface.PrintCourseCourses()
-            case self.addgrade:
+            case self.addGrade:
                 self.courseInterface.AddGradeForCourse()
+            case self.removeGrade:
+                self.courseInterface.RemoveGradeFormCourse()
             case self.back:
                 self.HomePage()
         self.CoursePage()
