@@ -18,6 +18,11 @@ class StudentInterface():
     def UpdateStudent(self):
         studentId = IntPrompt.ask('enter student Id')
         studentName = Prompt.ask('enter student new name')
+        self.context.StudentsUpdate(studentId, studentName)
+
     def PrintAllStudents(self):
         self.context.StudnetsPrint()
-    def 
+
+    def PrintStudentCourses(self):
+        studentId = IntPrompt.ask('enter student Id')
+        self.context.GradesForStudent(studentId)
