@@ -20,6 +20,6 @@ class CourseContext():
         self._currentMaxCourseId += 1
         self.storage.SaveToFile(self.courseFileName, self)
 
-    def DeleteCourse(self, Id):
+    def Remove(self, Id):
         self._courseList.Remove(Id)
         self.storage.SaveToFile(self.courseFileName, self)
