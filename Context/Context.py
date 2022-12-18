@@ -63,7 +63,7 @@ class Context():
                 self.RemoveCourseFromStudent(Id, courseIdToDelete)
                 courseIdToDelete += 1
 
-    class CourseContext():
+    class CourseContext(StudentCourseContext):
         def __init__(self):
             self._courseList = LinkedList()
             self._currentMaxCourseId = 1
@@ -82,3 +82,7 @@ class Context():
         def DeleteCourse(self, Id):
             self._courseList.Remove(Id)
             self.storage.SaveToFile(self.courseFileName, self)
+            studentIdToDelete = 1
+            while studentIdToDelete < (len(self._gradesTable.size)):
+                self.RemoveCourseFromStudent(studentIdToDelete,Id)
+                studentIdToDelete += 10
