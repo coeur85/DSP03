@@ -44,6 +44,9 @@ class Context():
             courseIdToDelete += 1
         self.__saveAll()
 
+    def StudnetsPrint(self):
+        self.__Students.PrintAll()
+
     def CourseAddNew(self, name: str):
         self.__Courses.AddNewCourse(name)
         self.__saveAll()
@@ -56,6 +59,8 @@ class Context():
             studentIdToDelete += 1
         self.__saveAll()
 
+    def CoursesPrint(self):
+        self.__Courses.PrintAll()
     def GradeAddNew(self, studentId, courseId, grade):
         self.__Grades.AddCourseToStudent(studentId, courseId, grade)
         self.__saveAll()

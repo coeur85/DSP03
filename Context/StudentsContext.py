@@ -17,3 +17,6 @@ class StudentContext():
 
     def DeleteStudent(self, Id: int):
         self._studentList.Remove(Id)
+    def PrintAll(self):
+        print(f'---- Students list ----')
+        self._studentList.Print()

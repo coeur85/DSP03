@@ -16,3 +16,6 @@ class CourseContext():
 
     def DeleteCourse(self, Id):
         self._courseList.Remove(Id)
+    def PrintAll(self):
+        print(f'---- courses list -----')
+        self._courseList.Print()

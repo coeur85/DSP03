@@ -72,3 +72,12 @@ class LinkedList:
                 current = current.next
             else:
                 current.value = value
+
+    def Print(self):
+        current = self.head
+        while current != None:
+            print(current.value)
+            current = current.next
+        print(f'-----------------------')
+        print(f'total {self.size} items')
+        print(f'-----------------------')
